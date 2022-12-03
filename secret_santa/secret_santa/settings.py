@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-sx%)*2+da30j67!bdfvb99(k@8$8r$t%xo(&nhvb@6+z((k9pa
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'shoescaboose.club'
+    'shoescaboose.club',
+    'localhost',
 ]
 
 
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

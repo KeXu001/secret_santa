@@ -10,3 +10,4 @@ cd secret_santa
 python manage.py startapp ssweb
 
 python manage.py migrate --run-syncdb
+python manage.py collectstatic
