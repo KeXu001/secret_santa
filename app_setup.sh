@@ -8,3 +8,5 @@ pip install -r requirements.txt
 django-admin startproject secret_santa
 cd secret_santa
 python manage.py startapp ssweb
+
+python manage.py migrate --run-syncdb
