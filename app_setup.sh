@@ -11,3 +11,5 @@ python manage.py startapp ssweb
 
 python manage.py migrate --run-syncdb
 python manage.py collectstatic
+
+python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
