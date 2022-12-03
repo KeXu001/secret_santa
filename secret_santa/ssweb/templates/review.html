@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Hello, {{ participant.name }}</h1>
+  <p>You wished for <p>{{ participant.wishlist }}</p></p>
+
+  {% if receiving_from %}
+    <p>You will be receiving a gift from ???</p>
+  {% endif %}
+
+  {% if giving_to %}
+    <p>You are supposed to give <span style="background-color:lightgreen">{{ giving_to.name }}</span> a gift!</p>
+    <p>They wanted: <p style="background-color:lightgreen">{{ giving_to.wishlist }}</p></p>
+  {% else %}
+    <p>No secret santa assignments have been made yet
+  {% endif %}
+
+{% endblock %}

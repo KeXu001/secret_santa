@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>You've been invited to join {{ game.name }}</h1>
+
+  {% for participant in game.participants %}
+    <p>{{ participant.name }} is participating</p>
+  {% empty %}
+    <p>No other participants yet</p>
+  {% endfor %}
+
+  <p>If you've already joined, you may review your participation <a href="{{ review_url }}">here</a></p>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit">
+  </form>
+{% endblock %}
