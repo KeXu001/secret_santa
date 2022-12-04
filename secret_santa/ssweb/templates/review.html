@@ -2,7 +2,10 @@
 
 {% block content %}
   <h1>Hello, {{ participant.name }}</h1>
-  <p>You wished for <p>{{ participant.wishlist }}</p></p>
+  <p>You wished for <p>{{ participant.wishlist|linebreaks }}</p></p>
+  <a href="{{ update_wishlist_link }}">
+    <input type="button" value="Edit wishlist"/>
+  </a>
 
   {% if receiving_from %}
     <p>You will be receiving a gift from ???</p>
@@ -10,7 +13,10 @@
 
   {% if giving_to %}
     <p>You are supposed to give <span style="background-color:lightgreen">{{ giving_to.name }}</span> a gift!</p>
-    <p>They wanted: <p style="background-color:lightgreen">{{ giving_to.wishlist }}</p></p>
+    <p>They wanted:</p>
+    <div style="background-color:lightgreen">
+      <p>{{ giving_to.wishlist|linebreaks }}</p>
+    </div>
   {% else %}
     <p>No secret santa assignments have been made yet
   {% endif %}

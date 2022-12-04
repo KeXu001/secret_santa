@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 
-from .forms import JoinGameForm, ReviewLoginForm
+from .forms import JoinGameForm, ReviewLoginForm, EditWishlistForm
 from .models import Invite, Participant, Pairing
 
 def join_game(request, code):
@@ -88,8 +88,42 @@ def review(request, participant_id):
 
     context = {
         'participant': participant,
+        'update_wishlist_link': reverse('update', args=(participant.id,)),
         'receiving_from': receiving_from,
         'giving_to': giving_to,
     }
 
     return render(request, 'review.html', context)
+
+def update(request, participant_id):
+    participant = get_object_or_404(Participant, id=participant_id)
+
+    if 'authenticated_participant_id' not in request.session:
+        return HttpResponse('Not authorized', status=401)
+
+    authenticated_participant_id = request.session['authenticated_participant_id']
+
+    if authenticated_participant_id != participant.id:
+        return HttpResponse('Not authorized', status=401)
+
+    if request.method == 'POST':
+        form = EditWishlistForm(request.POST)
+
+        if form.is_valid():
+            wishlist = form.cleaned_data['wishlist']
+
+            participant.wishlist = wishlist
+            participant.save()
+
+            return HttpResponseRedirect(reverse('review', args=(participant.id,)))
+
+    else:
+        form = EditWishlistForm()
+
+    context = {
+        'participant': participant,
+        'review_link': reverse('review', args=(participant.id,)),
+        'form': form,
+    }
+
+    return render(request, 'update.html', context)

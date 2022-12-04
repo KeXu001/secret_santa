@@ -38,7 +38,7 @@ class Participant(models.Model):
     game = models.ForeignKey('Game', on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
     secret_word = models.CharField(max_length=100)
-    wishlist = models.CharField(max_length=400)
+    wishlist = models.TextField(max_length=400)
 
     def __str__(self):
         return '{} ({})'.format(self.name, self.game.name)
