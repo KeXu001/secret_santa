@@ -2,6 +2,7 @@
 
 {% block content %}
   <h1>You've been invited to join {{ game.name }}</h1>
+  <p>The budget is ${{ game.budget }}</p>
 
   {% for participant in game.participants %}
     <p>{{ participant.name }} is participating</p>
